@@ -16,29 +16,33 @@ def test_configuration_file_exists(host, file):
     assert file.exists
 
 
-@pytest.mark.parametrize('file', files[0])
-def test_hosts_allow_contains_sshd(host, file):
-    cmd = "grep 'sshd: ALL' " + file
+@pytest.mark.parametrize('cmd, expected', [
+  ("grep 'sshd: ALL' /etc/hosts.allow", 0),
+])
+def test_hosts_allow_contains_sshd(host, cmd, expected):
     result = host.run(cmd)
-    assert result.rc == 0
+    assert result.rc == expected
 
 
-@pytest.mark.parametrize('file', files[0])
-def test_hosts_allow_not_contains_all_connections(host, file):
-    cmd = "grep 'ALL: ALL' " + file
+@pytest.mark.parametrize('cmd, expected', [
+  ("grep 'ALL: ALL' /etc/hosts.allow", 1),
+])
+def test_hosts_allow_not_contains_all_connections(host, cmd, expected):
     result = host.run(cmd)
-    assert result.rc == 1
+    assert result.rc == expected
 
 
-@pytest.mark.parametrize('file', files[1])
-def test_hosts_deny_not_contains_vsftpd(host, file):
-    cmd = "grep 'sshd: ALL' " + file
+@pytest.mark.parametrize('cmd, expected', [
+  ("grep 'vsftpd: ALL' /etc/hosts.deny", 1),
+])
+def test_hosts_deny_not_contains_vsftpd(host, cmd, expected):
     result = host.run(cmd)
-    assert result.rc == 1
+    assert result.rc == expected
 
 
-@pytest.mark.parametrize('file', files[1])
-def test_hosts_deny_contains_all_connections(host, file):
-    cmd = "grep 'ALL: ALL' " + file
+@pytest.mark.parametrize('cmd, expected', [
+  ("grep 'ALL: ALL' /etc/hosts.deny", 0),
+])
+def test_hosts_deny_contains_all_connections(host, cmd, expected):
     result = host.run(cmd)
-    assert result.rc == 2
+    assert result.rc == expected
