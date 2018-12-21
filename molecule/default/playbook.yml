@@ -18,4 +18,4 @@
       changed_when: false
 
   roles:
-    - role: tcpwrappers
+    - role: ansible-role-tcpwrappers
