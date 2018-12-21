@@ -4,7 +4,7 @@ services: docker
 
 env:
   global:
-    - ROLE_NAME: logrotate
+    - ROLE_NAME: tcpwrappers
   matrix:
     - MOLECULE_DISTRO: centos:7
       MOLECULE_DOCKER_COMMAND: /usr/lib/systemd/systemd
