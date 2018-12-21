@@ -1,0 +1,7 @@
+---
+tcpwrappers_allow_all_connections: false
+tcpwrappers_deny_all_connections: true
+tcpwrappers_allows:
+  - daemon: 'sshd'
+    clients: [ 'ALL' ]
+tcpwrappers_denys: []

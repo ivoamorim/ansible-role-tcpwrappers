@@ -1,0 +1,25 @@
+---
+language: python
+services: docker
+
+env:
+  global:
+    - ROLE_NAME: logrotate
+  matrix:
+    - MOLECULE_DISTRO: centos:7
+      MOLECULE_DOCKER_COMMAND: /usr/lib/systemd/systemd
+
+install:
+  # Install test dependencies.
+  - pip install molecule docker
+
+before_script:
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq python-apt python-pycurl
+
+script:
+  # Run tests.
+  - molecule test
+
+notifications:
+  email: false

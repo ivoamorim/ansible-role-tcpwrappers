@@ -1,0 +1,21 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    tcpwrappers_allow_all_connections: false
+    tcpwrappers_deny_all_connections: true
+    tcpwrappers_allows:
+      - daemon: 'sshd'
+        clients: [ 'ALL' ]
+    tcpwrappers_denys:
+      - daemon: 'vsftpd'
+        clients: [ 'ALL' ]
+
+  pre_tasks:
+    - name: Install Dependencies.
+      yum: name=libselinux-python
+      when: ansible_os_family == 'RedHat'
+      changed_when: false
+
+  roles:
+    - role: tcpwrappers
