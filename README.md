@@ -36,6 +36,9 @@ Example Playbook
       - daemon: 'sshd'
         clients: [ 'ALL' ]
     tcpwrappers_denys: []
+
+  roles:
+    - role: ivoamorim.tcpwrappers
 ```
 
 License

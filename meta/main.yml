@@ -6,9 +6,17 @@ galaxy_info:
   license: BSD
   min_ansible_version: 1.0
   platforms:
-    - name: centos
+    - name: Debian
+      versions:
+        - stretch
+    - name: EL
       versions:
         - 7
+    - name: Ubuntu
+      versions:
+        - bionic
   categories:
     - system
+    - security
+    - tcpwrappers
 dependencies: []
