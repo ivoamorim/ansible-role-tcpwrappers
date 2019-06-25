@@ -2,6 +2,10 @@
 ALL: ALL
 {% else %}
 {% for item in tcpwrappers_denys %}
-{{ item.daemon }}: {{ item.clients| join (' ')}}
+
+{% if item.comment is defined %}
+# {{ item.comment }}
+{% endif %}
+{{ item.daemon }}: {{ item.clients| ipwrap| join (' ')}}
 {% endfor %}
 {% endif %}

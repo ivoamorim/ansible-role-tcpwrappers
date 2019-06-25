@@ -35,6 +35,7 @@ Example Playbook
     tcpwrappers_allows:
       - daemon: 'sshd'
         clients: [ 'ALL' ]
+        comment: 'Allow all on SSH'
     tcpwrappers_denys: []
 
   roles:
