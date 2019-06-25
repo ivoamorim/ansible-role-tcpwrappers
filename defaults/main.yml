@@ -4,4 +4,5 @@ tcpwrappers_deny_all_connections: true
 tcpwrappers_allows:
   - daemon: 'sshd'
     clients: [ 'ALL' ]
+    comment: ''
 tcpwrappers_denys: []
